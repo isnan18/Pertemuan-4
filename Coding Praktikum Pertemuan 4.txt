@@ -1,0 +1,21 @@
+from gpio import *
+from time import *
+
+def main():
+    pinMode(0, IN)  # Konfigurasi pin 0 sebagai input untuk sensor gerakan
+    pinMode(1, OUT) # Konfigurasi pin 1 sebagai output untuk pintu garasi
+    pinMode(2, OUT) # Konfigurasi pin 2 sebagai output untuk LED
+    while True:
+        if digitalRead(0) == HIGH: # Jika sensor gerakan mendeteksi gerakan
+            print("Gerakan terdeteksi, membuka garasi...")
+            digitalWrite(1, HIGH) # Hidupkan pintu garasi
+            digitalWrite(2, HIGH) # Hidupkan LED
+            sleep(10)  # Tunda selama 10 detik (opsional)
+        else:
+            print("Tidak ada gerakan, menutup garasi...")
+            digitalWrite(1, LOW) # Matikan pintu garasi
+            digitalWrite(2, LOW) # Matikan LED
+            sleep(10)  # Tunda selama 10 detik (opsional)
+
+if __name__ == "__main__":
+    main()
